@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Search Engine</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f4f4f9; }
+        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        
+        /* Updated Search Box Styling */
+        .search-box { display: flex; gap: 10px; margin-bottom: 30px; }
+        
+        /* Style for the text input */
+        input[type="text"] { flex-grow: 1; padding: 10px; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; }
+        
+        /* New Style for the Dropdown */
+        select { padding: 10px; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; background-color: white; cursor: pointer; }
+        
+        button { padding: 10px 20px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        
+        .result-item { border-bottom: 1px solid #eee; padding: 15px 0; }
+        .result-item:last-child { border-bottom: none; }
+        .score { color: #28a745; font-weight: bold; font-size: 0.9em; }
+        .text { margin-top: 5px; line-height: 1.5; color: #555; }
+        .model-badge { display: inline-block; background: #eee; color: #555; padding: 2px 8px; border-radius: 10px; font-size: 0.8em; margin-bottom: 5px;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>That's What I LIKE (Search)</h1>
+    
+    <form class="search-box" method="POST" action="/">
+        <select name="model_type">
+            <option value="glove" {% if selected_model == 'glove' %}selected{% endif %}>GloVe</option>
+            <option value="skipgram" {% if selected_model == 'skipgram' %}selected{% endif %}>Skipgram</option>
+            <option value="skipgram_neg" {% if selected_model == 'skipgram_neg' %}selected{% endif %}>Skipgram (Neg)</option>
+            <option value="gensim" {% if selected_model == 'gensim' %}selected{% endif %}>Gensim</option>
+        </select>
+
+        <input type="text" name="query" placeholder="Enter search text (e.g., 'Harry Potter')" value="{{ query }}" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <div class="results">
+            <h3>Top Results <span style="font-weight: normal; font-size: 0.8em; color: #777;">(using {{ selected_model }})</span>:</h3>
+            {% for score, text in results %}
+                <div class="result-item">
+                    <div class="score">Similarity Score: {{ "%.4f"|format(score) }}</div>
+                    <div class="text">{{ text }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% elif query %}
+        <p>No results found (or low similarity) using model <b>{{ selected_model }}</b>.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

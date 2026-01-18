@@ -1,0 +1,16 @@
+# --- Large Data Files (MUST IGNORE) ---
+glove.6B.100d.txt
+*.pkl
+model/*.pkl
+*.txt
+
+# Keep specific text files if you need them, but block the big ones
+# (If capital.txt is small, you can remove *.txt above, but glove.6B.100d.txt MUST be ignored)
+glove*.txt
+
+# --- System & Python ---
+.DS_Store
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
