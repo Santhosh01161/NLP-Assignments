@@ -6,6 +6,9 @@ A powerful semantic search engine built with **Flask** that goes beyond simple k
 
 ## 🚀 Features
 
+https://github.com/user-attachments/assets/101cd20d-a700-4f48-a563-3c10eb60a693
+
+
 * **🧠 Multi-Model Intelligence:** Switch dynamically between four distinct embedding models to see how results differ:
     * **GloVe:** Global Vectors for Word Representation.
     * **Word2Vec (Skipgram):** Custom implementation of the Skipgram architecture.
@@ -25,3 +28,5 @@ Follow these steps to get the search engine running on your local machine.
 ```bash
 git clone [https://github.com/Santhosh01161/nlp-semantic-search.git](https://github.com/Santhosh01161/nlp-semantic-search-engine.git)
 cd nlp-semantic-search
+
+
